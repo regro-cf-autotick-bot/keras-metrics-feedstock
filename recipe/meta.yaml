@@ -6,23 +6,23 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/keras-metrics-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/keras-metrics-{{ version }}.tar.gz
   sha256: e65b8ace5f4d2100452d3109ef755870f1cfc00d13cb6d8eb96084aee2f5efa2
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - keras
     - pip
-    - python >=3.6
+    - python {{ python_min }}
     - tensorflow
   run:
     - keras >=2.1.5
-    - python >=3.6
+    - python >={{ python_min }}
     - scikit-learn >=0.20.2
     - tensorflow >=1.8.0
 
@@ -34,6 +34,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/netrack/keras-metrics
